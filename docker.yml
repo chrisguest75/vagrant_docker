@@ -1,0 +1,14 @@
+# docker.yml
+
+- name: Example
+  hosts: "all"
+  become: true
+  
+  roles:
+    - role: "nickjj.docker"
+      tags: ["docker"]
+      vars:
+        docker__edition: "ce"
+        docker__channel: ["stable"]
+        #docker__version: "18.09.3"
+        docker__version: "18.06.1"
