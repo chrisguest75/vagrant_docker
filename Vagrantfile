@@ -37,7 +37,7 @@ Vagrant.configure("2") do |config|
   # Create a public network, which generally matched to bridged network.
   # Bridged networks make the machine appear as another physical device on
   # your network.
-  # config.vm.network "public_network"
+  config.vm.network "public_network", :bridge => "enp0s25: Ethernet"
 
   # Share an additional folder to the guest VM. The first argument is
   # the path on the host to the actual folder. The second argument is
@@ -49,13 +49,14 @@ Vagrant.configure("2") do |config|
   # backing providers for Vagrant. These expose provider-specific options.
   # Example for VirtualBox:
   #
-  # config.vm.provider "virtualbox" do |vb|
-  #   # Display the VirtualBox GUI when booting the machine
-  #   vb.gui = true
-  #
-  #   # Customize the amount of memory on the VM:
-  #   vb.memory = "1024"
-  # end
+   config.vm.provider "virtualbox" do |vb|
+     # Display the VirtualBox GUI when booting the machine
+     vb.gui = false
+  
+     # Customize the amount of memory on the VM:
+     vb.memory = "8096"
+     vb.name = "ubuntu_docker"
+   end
   #
   # View the documentation for the provider you are using for more
   # information on available options.
@@ -63,17 +64,16 @@ Vagrant.configure("2") do |config|
   # Enable provisioning with a shell script. Additional provisioners such as
   # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
   # documentation for more information about their specific syntax and use.
-  config.vm.provision "shell", inline: <<-SHELL
-    echo "Start provisioning"
-    apt-get update
-    apt-get install -y curl 
-    apt-get install -y git
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-    echo "End provisioning"
-  SHELL
+  # config.vm.provision "shell", inline: <<-SHELL
+  #   echo "Start provisioning"
+  #   apt-get update
+  #   apt-get install -y curl git zsh
+  #   sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+  #   echo "End provisioning"
+  # SHELL
 
   config.vm.provision "ansible" do |ansible|
-    ansible.playbook = "docker.yml"
+    ansible.playbook = "provision.yml"
     ansible.verbose        = true
   end  
 end
