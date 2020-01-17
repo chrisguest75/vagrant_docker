@@ -15,6 +15,7 @@
           - curl 
           - git 
           - zsh
+          - bash-completion
 
     - name: Update all packages to the latest version
       apt:
