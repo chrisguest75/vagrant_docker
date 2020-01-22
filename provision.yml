@@ -16,6 +16,7 @@
           - git 
           - zsh
           - nano
+          - bash-completion
 
     - name: Update all packages to the latest version
       apt:
