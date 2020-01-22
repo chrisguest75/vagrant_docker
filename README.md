@@ -1,5 +1,7 @@
 # README.md
 A demonstration of how to use Vagrant to bring up a default Ubuntu VM on virtualbox.  
+## TODO
+1. Build a template vagrantfile
 
 ## Prequisites
 [Vagrant Setup](https://www.vagrantup.com/intro/getting-started/project_setup.html)
