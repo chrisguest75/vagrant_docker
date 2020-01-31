@@ -60,7 +60,16 @@ vagrant reload
 ```
 vagrant destroy
 ```
+## Connect VM 
+```
+vagrant ssh
+```
 
+or
+
+```
+ssh -i ./.vagrant/machines/default/virtualbox/private_key -l vagrant  -o StrictHostKeyChecking=no -p 2222 127.0.0.1
+```
 
 ## Troubleshooting
 
