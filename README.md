@@ -77,6 +77,12 @@ or
 ssh -i ./.vagrant/machines/default/virtualbox/private_key -l vagrant -o StrictHostKeyChecking=no -p 2222 127.0.0.1
 ```
 
+or for VSCode Remote-ssh
+```
+vagrant ssh-config
+``` 
+then copy the output to ssh-config
+
 ## Troubleshooting
 
 [Issue with Vagrant 2.2.6 and VirtualBox 6.1](https://github.com/oracle/vagrant-boxes/issues/178)
