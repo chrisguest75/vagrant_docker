@@ -100,6 +100,13 @@ Host default
   LogLevel FATAL
 ```
 
+## SSH Tunneling
+NOTE: Work out how to get this working.
+If hosting a service on a port tunnel if to host machine. 
+```
+ssh -i ./.vagrant/machines/default/virtualbox/private_key -l vagrant -o StrictHostKeyChecking=no -p 2222 -L 8080:127.0.0.1:8080 -N 127.0.0.1 -v
+```
+
 ## Troubleshooting
 
 [Issue with Vagrant 2.2.6 and VirtualBox 6.1](https://github.com/oracle/vagrant-boxes/issues/178)
