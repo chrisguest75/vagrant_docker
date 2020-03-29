@@ -11,33 +11,33 @@ Install on MacOS
 
 Tested on vagrant: 2.2.7 & ansible 2.9.2
 
-```
+```sh
 brew install ansible
 brew cask install vagrant
 ```
 
 Install on Linux
-```
+```sh
 apt install ansible
 apt install vagrant
 ```
 
 Install role dependencies
-```
+```sh
 ansible-galaxy role list
 ansible-galaxy install nickjj.docker
 ansible-galaxy install gantsign.oh-my-zsh 
 ```
 
 Creating a new default Vagrantfile
-```
+```sh
 vagrant init hashicorp/bionic64
 ```
 
 ## Build the VM
 
-### Network
-```
+### Configure Network
+```sh
 VBoxManage list bridgedifs | grep ^Name
 ```
 
@@ -46,42 +46,59 @@ Change Vagrantfile with adapter name
 config.vm.network "public_network", :bridge => "enp0s25: Ethernet"
 ```
 
-## 
+### Build VM
 NOTE: If provision is not working it may be because you have an old version of vagrant 
-```
+```sh
 vagrant up
 vagrant provision
 ```
 
-```
+```sh
 vagrant up --provider virtualbox --provision
 ```
 
 ## Reboot VM
-```
+```sh
 vagrant reload
 ```
 
 ## Remove VM
-```
+```sh
 vagrant destroy
 ```
 ## Connect VM 
-```
+Vagrant supports ssh directly to the box
+```sh
 vagrant ssh
 ```
 
-or
-
-```
+But if you would rather use the ssh tool
+```sh
 ssh -i ./.vagrant/machines/default/virtualbox/private_key -l vagrant -o StrictHostKeyChecking=no -p 2222 127.0.0.1
 ```
 
-or for VSCode Remote-ssh
+We can also use VSCode to remote-ssh and edit files on the VM
+```sh
+code --install-extension ms-vscode-remote.remote-ssh
 ```
+
+```sh
 vagrant ssh-config
 ``` 
 then copy the output to ssh-config
+
+```
+Host default
+  HostName 127.0.0.1
+  User vagrant
+  Port 2222
+  UserKnownHostsFile /dev/null
+  StrictHostKeyChecking no
+  PasswordAuthentication no
+  IdentityFile /Users/user/Code/scratch/vagrant_docker/.vagrant/machines/default/virtualbox/private_key
+  IdentitiesOnly yes
+  LogLevel FATAL
+```
 
 ## Troubleshooting
 
