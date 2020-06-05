@@ -69,6 +69,8 @@ vagrant destroy
 ## Connect VM 
 Vagrant supports ssh directly to the box
 ```sh
+# if paused
+vagrant resume
 vagrant ssh
 ```
 
@@ -100,6 +102,27 @@ Host default
   LogLevel FATAL
 ```
 
+## Upgrading vmadditions
+
+```sh
+# Uninstall old version
+sudo vbox-uninstall-guest-additions
+
+# Reboot
+sudo shutdown -r now
+
+# 1. Open the vm in GUI mode
+# 2. Insert the Additions CD 
+# 3. /dev/cdrom should exist
+
+sudo mkdir -p /mnt/cdrom
+sudo mount /dev/cdrom /mnt/cdrom
+sudo sh ./VBoxLinuxAdditions.run --nox11
+sudo shutdown -r now
+
+```
+
+
 ## SSH Tunneling
 NOTE: Work out how to get this working.
 If hosting a service on a port tunnel if to host machine. 
@@ -112,3 +135,13 @@ ssh -i ./.vagrant/machines/default/virtualbox/private_key -l vagrant -o StrictHo
 [Issue with Vagrant 2.2.6 and VirtualBox 6.1](https://github.com/oracle/vagrant-boxes/issues/178)
 
 [Bridged Networking](https://github.com/daftlabs/creed/wiki/Set-up-Vagrant-network-bridge)
+
+### Time sync
+Check timesync if you have issues with certificates
+```sh
+date
+sudo hwclock
+sudo VBoxService --timesync-min-adjust 1000
+sudo VBoxService --timesync-set-threshold 1000
+sudo VBoxService --timesync-interval 60000
+```
