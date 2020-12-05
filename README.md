@@ -145,3 +145,15 @@ sudo VBoxService --timesync-min-adjust 1000
 sudo VBoxService --timesync-set-threshold 1000
 sudo VBoxService --timesync-interval 60000
 ```
+
+### Ansible not working
+If you're seeing the following issue then make sure you have set your pyenv back to system for the directory you are building from.  
+```sh
+Traceback (most recent call last):
+  File "/bin/ansible", line 34, in <module>
+    from ansible import context
+ModuleNotFoundError: No module named 'ansible'
+
+# use pyenv
+pyenv local system
+```
