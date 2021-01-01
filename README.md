@@ -60,6 +60,9 @@ vagrant up --provider virtualbox --provision
 ## Reboot VM
 ```sh
 vagrant reload
+
+# shutdown machine
+vagrant halt
 ```
 
 ## Remove VM
@@ -137,7 +140,19 @@ ssh -i ./.vagrant/machines/default/virtualbox/private_key -l vagrant -o StrictHo
 [Bridged Networking](https://github.com/daftlabs/creed/wiki/Set-up-Vagrant-network-bridge)
 
 ### Time sync
-Check timesync if you have issues with certificates
+Check timesync if you have issues with certificates during software installation.  
+
+Make sure the additions and extension pack is installed.   
+```sh
+# if not showing anything then ensure it is installed
+vboxmanage list extpacks   
+```
+
+```sh
+# add additions inside the vm
+sudo apt-get install virtualbox-guest-additions-iso 
+```
+
 ```sh
 date
 sudo hwclock
