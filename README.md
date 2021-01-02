@@ -142,23 +142,42 @@ ssh -i ./.vagrant/machines/default/virtualbox/private_key -l vagrant -o StrictHo
 ### Time sync
 Check timesync if you have issues with certificates during software installation.  
 
+```sh
+# on guest vm 
+date
+# hoe far off is clock?
+sudo hwclock -r
+```
+
 Make sure the additions and extension pack is installed.   
 ```sh
-# if not showing anything then ensure it is installed
+# if not showing any output then ensure it is installed using brew
 vboxmanage list extpacks   
+
+# install using brew 
+brew install virtualbox-extension-pack
 ```
 
+
 ```sh
-# add additions inside the vm
+# add additions inside the guest vm
 sudo apt-get install virtualbox-guest-additions-iso 
-```
 
-```sh
-date
-sudo hwclock
 sudo VBoxService --timesync-min-adjust 1000
 sudo VBoxService --timesync-set-threshold 1000
 sudo VBoxService --timesync-interval 60000
+
+sudo apt-get install ntp
+
+sudo hwclock -r
+systemctl status ntp
+timedatectl
+timedatectl set-ntp true
+timedatectl
+date
+
+# should now work without error
+sudo apt-get update
 ```
 
 ### Ansible not working
