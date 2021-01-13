@@ -1,37 +1,48 @@
 # README.md
-A demonstration of how to use Vagrant to bring up a default Ubuntu VM on virtualbox.  
+A demonstration of how to use Vagrant to bring up a default Ubuntu VM on virtualbox. 
+
 ## TODO
 1. Build a template vagrantfile
+1. Create a set of different types of machines for testing.  
+  * Memory size
+  * Network
+  * Image
+  * Software to be installed 
 
 ## Prequisites
 [Vagrant Setup](https://www.vagrantup.com/intro/getting-started/project_setup.html)
 
 ### Installation of Vagrant and Ansible
-Install on MacOS 
+Install on `MacOS` 
 
-Tested on vagrant: 2.2.7 & ansible 2.9.2
+Tested on vagrant: `2.2.7` & ansible `2.9.2`
 
 ```sh
 brew install ansible
 brew cask install vagrant
 ```
 
-Install on Linux
+Install on `Debian Linux`
 ```sh
 apt install ansible
 apt install vagrant
 ```
 
-Install role dependencies
+Install `Vagrant` role dependencies
 ```sh
 ansible-galaxy role list
 ansible-galaxy install nickjj.docker
 ansible-galaxy install gantsign.oh-my-zsh 
 ```
 
-Creating a new default Vagrantfile
+Creating a new default `Vagrantfile`
 ```sh
 vagrant init hashicorp/bionic64
+```
+
+Add the `vscode` extension
+```sh
+code --install-extension bbenoist.vagrant
 ```
 
 ## Build the VM
@@ -42,7 +53,7 @@ VBoxManage list bridgedifs | grep ^Name
 ```
 
 Change Vagrantfile with adapter name
-```
+```ruby
 config.vm.network "public_network", :bridge => "enp0s25: Ethernet"
 ```
 
@@ -129,7 +140,7 @@ sudo shutdown -r now
 ## SSH Tunneling
 NOTE: Work out how to get this working.
 If hosting a service on a port tunnel if to host machine. 
-```
+```sh
 ssh -i ./.vagrant/machines/default/virtualbox/private_key -l vagrant -o StrictHostKeyChecking=no -p 2222 -L 8080:127.0.0.1:8080 -N 127.0.0.1 -v
 ```
 
