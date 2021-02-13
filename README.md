@@ -1,6 +1,8 @@
 # README.md
 A demonstration of how to use Vagrant to bring up a default Ubuntu VM on virtualbox. 
 
+This has been replaced by [vagrant_machines](https://github.com/chrisguest75/vagrant_machines)
+
 ## TODO
 1. Build a template vagrantfile
 1. Create a set of different types of machines for testing.  
